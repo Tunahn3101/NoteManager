@@ -5,3 +5,13 @@
 //  Created by Tunahn on 15/4/26.
 //
 
+import SwiftUI
+
+struct HomeScreen: View {
+    var body: some View {
+//        NavigationStack {
+//            LoadingScreen()
+//        }
+        Text("Home Screen")
+    }
+}

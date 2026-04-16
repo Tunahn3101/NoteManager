@@ -8,14 +8,28 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var api = ApiEnv(api: ApiImpl())
+    @StateObject var store = StoreEnv(store: StoreImpl())
+    @StateObject var log = AppLogEnv(appLog: AppLogImpl())
+    @StateObject var mainVM = MainViewModel()
+    
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            LoadingScreen()
+                .alert("Alert", isPresented: $mainVM.isShowError) {
+                    Button("Cancel", role: .cancel){
+                        //logic
+                    }
+                } message: {
+                    Text("\(mainVM.msg)")
+                }
+            
         }
-        .padding()
+        .environmentObject(api)
+        .environmentObject(store)
+        .environmentObject(log)
+        .environmentObject(mainVM)
     }
 }
 
