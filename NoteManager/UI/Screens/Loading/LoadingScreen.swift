@@ -8,10 +8,19 @@
 import SwiftUI
 
 struct LoadingScreen: View {
+    @EnvironmentObject var storeEnv: StoreEnv
+    @StateObject var vm = LoadingViewModel()
+    
+    @State var isShowNext = false
+    
     var body: some View {
-//        NavigationStack {
-//            LoadingScreen()
-//        }
-        Text("Loading Screen")
+        VStack{
+            ProgressView()
+            Text("Loading \(Int((vm.percent * 100)))%")
+        }
+        .onAppear{
+            vm.store = storeEnv.store
+            vm.loadData()
+        }
     }
 }
