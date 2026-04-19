@@ -8,10 +8,29 @@
 import SwiftUI
 
 struct TutorialScreen: View {
+    @State var isSkip = false
+    @State var isShowNext = false
     var body: some View {
-//        NavigationStack {
-//            LoadingScreen()
-//        }
-        Text("Tutorial Screen") 
+
+        VStack {
+            Image(systemName: "book").padding()
+            HStack {
+                Button("Skip") {
+                    isSkip = true
+                    isShowNext = true
+                }.padding()
+                Button("Read All") {
+                    isSkip = false
+                    isShowNext = true
+                }.padding()
+                
+            }
+        }
+        .navigationDestination(isPresented: $isShowNext) {
+            LoginScreen(isSkip: isSkip)
+        }
+        .navigationBarBackButtonHidden(true)
     }
+
 }
+

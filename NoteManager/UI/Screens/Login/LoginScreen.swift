@@ -8,10 +8,19 @@
 import SwiftUI
 
 struct LoginScreen: View {
+    
+    var isSkip: Bool
+    
+    
+    init(isSkip: Bool) {
+        self.isSkip = isSkip
+    }
+    
     var body: some View {
-//        NavigationStack {
-//            LoadingScreen()
-//        }
-        Text("Login Screen")
+        VStack{
+            Text("Loagin Screen")
+            Text("isSkip: \(isSkip.description)")
+        }
+        .navigationBarBackButtonHidden()
     }
 }

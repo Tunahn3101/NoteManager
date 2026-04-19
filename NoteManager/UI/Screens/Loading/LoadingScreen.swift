@@ -22,5 +22,22 @@ struct LoadingScreen: View {
             vm.store = storeEnv.store
             vm.loadData()
         }
+        .onChange(of: vm.loadStatus) { _ in
+            if (vm.loadStatus == .done) {
+                if (vm.isFirstStart) {
+                    vm.setSecondStart()
+                    
+                }
+                isShowNext = true
+            }
+            
+        }
+        .navigationDestination(isPresented: $isShowNext) {
+            if(vm.isFirstStart){
+                TutorialScreen()
+            } else {
+                LoginScreen(isSkip: true)
+            }
+        }
     }
 }
