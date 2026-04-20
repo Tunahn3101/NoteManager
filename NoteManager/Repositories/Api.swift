@@ -9,12 +9,12 @@ import Foundation
 import Combine
 
 class ApiEnv: ObservableObject{
-    // Provide the required publisher for ObservableObject
+    
     let objectWillChange = ObservableObjectPublisher()
 
     var api : Api {
         didSet {
-            // notify observers when the api reference changes
+         
             objectWillChange.send()
         }
     }

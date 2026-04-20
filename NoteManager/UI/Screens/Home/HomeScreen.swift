@@ -9,9 +9,9 @@ import SwiftUI
 
 struct HomeScreen: View {
     var body: some View {
-//        NavigationStack {
-//            LoadingScreen()
-//        }
-        Text("Home Screen")
+        VStack {
+            Text("Home Screen")
+        }
+        .navigationBarBackButtonHidden()
     }
 }

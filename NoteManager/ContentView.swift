@@ -12,19 +12,17 @@ struct ContentView: View {
     @StateObject var store = StoreEnv(store: StoreImpl())
     @StateObject var log = AppLogEnv(appLog: AppLogImpl())
     @StateObject var mainVM = MainViewModel()
-    
-    
+
     var body: some View {
         NavigationStack {
             LoadingScreen()
-                .alert("Alert", isPresented: $mainVM.isShowError) {
-                    Button("Cancel", role: .cancel){
-                        //logic
-                    }
-                } message: {
-                    Text("\(mainVM.msg)")
-                }
-            
+        }
+        .alert("Alert", isPresented: $mainVM.isShowError) {
+            Button("Cancel", role: .cancel) {
+                //logic
+            }
+        } message: {
+            Text("\(mainVM.msg)")
         }
         .environmentObject(api)
         .environmentObject(store)

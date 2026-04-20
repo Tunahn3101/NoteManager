@@ -18,9 +18,15 @@ class LoginViewModel: ObservableObject {
     
     func login() async {
         do {
-            
+            loginStatus = .loading
+            try await api?.login(username:  user, password:  pass)
+            loginStatus = .done
         } catch let e as AppError {
-            
+            if case .apiError(let msg) = e {
+                loginStatus = .error(msg: msg)
+            }
+        } catch {
+            loginStatus = .error(msg: "Other error")
         }
     }
 }
