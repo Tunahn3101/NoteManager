@@ -10,32 +10,39 @@ import SwiftUI
 struct LoadingScreen: View {
     @EnvironmentObject var storeEnv: StoreEnv
     @StateObject var vm = LoadingViewModel()
-    
+
     @State var isShowNext = false
-    
+
     var body: some View {
-        VStack{
+        VStack {
             ProgressView()
             Text("Loading \(Int((vm.percent * 100)))%")
         }
-        .onAppear{
+        .onAppear {
             vm.store = storeEnv.store
             vm.loadData()
         }
         .onChange(of: vm.loadStatus) { _ in
-            if (vm.loadStatus == .done) {
-                if (vm.isFirstStart) {
+            if vm.loadStatus == .done {
+                if vm.isFirstStart {
                     vm.setSecondStart()
-                    
+
                 }
                 isShowNext = true
             }
-            
+
         }
         .navigationDestination(isPresented: $isShowNext) {
-            if(vm.isFirstStart){
+            // Đã login rồi → Vào Home luôn
+            if vm.isLoggedIn {
+                HomeScreen()
+            }
+            // Lần đầu mở app → Tutorial
+            else if vm.isFirstStart {
                 TutorialScreen()
-            } else {
+            }
+            // Đã xem tutorial nhưng chưa login → Login
+            else {
                 LoginScreen(isSkip: true)
             }
         }

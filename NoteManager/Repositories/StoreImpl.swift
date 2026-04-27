@@ -22,8 +22,15 @@ class StoreImpl: Store {
     }
     
     func setNoteFirstStart() {
-        UserDefaults.standard.set("true", forKey: "is_second_start")
+        UserDefaults.standard.set(true, forKey: "is_second_start")
     }
     
+    // Authentication state management
+    func isLoggedIn() -> Bool {
+        return UserDefaults.standard.bool(forKey: "is_logged_in")
+    }
     
+    func setLoggedIn(_ value: Bool) {
+        UserDefaults.standard.set(value, forKey: "is_logged_in")
+    }
 }

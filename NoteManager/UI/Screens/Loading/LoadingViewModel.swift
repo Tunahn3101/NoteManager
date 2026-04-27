@@ -13,6 +13,7 @@ class LoadingViewModel: ObservableObject {
     @Published var percent: Double = 0.0
     @Published var loadStatus = LoadStatus.initial
     @Published var isFirstStart = false
+    @Published var isLoggedIn = false
     var store : Store?
 
 
@@ -42,6 +43,7 @@ class LoadingViewModel: ObservableObject {
             }
         }
         isFirstStart = store?.isFirstStart() ?? true
+        isLoggedIn = store?.isLoggedIn() ?? false
     }
 
 

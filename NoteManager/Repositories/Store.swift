@@ -23,4 +23,8 @@ protocol Store {
     func loadInitData(onProgress:((Double)->Void)) async throws
     func isFirstStart() -> Bool
     func setNoteFirstStart()
+    
+    // Authentication state
+    func isLoggedIn() -> Bool
+    func setLoggedIn(_ value: Bool)
 }
